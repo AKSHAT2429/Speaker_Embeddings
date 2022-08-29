@@ -42,6 +42,7 @@ def make_spk2utt(pytorch_audiodir : Path, ext : str = 'wav'):
 
 	# Code only works if the files are arranged in standard pytorch layout
 	spk2utt = {}
+
 	for audiofile in audio_paths:
 		if audiofile.is_file():
 			# Standard pytorch layout

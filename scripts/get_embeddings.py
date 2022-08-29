@@ -12,7 +12,7 @@ def get_embeddings(spk2utt : dict, embedder : load_embedder):
 	for i, (spkid, audio_files) in enumerate(spk2utt.items(), 1):
 		embeddings = []
 		desc = '{}/{}: Extracting embeddings for {}'.format(i, num_spks, spkid)
-		for audio_file in tqdm(audio_files, desc = desc):	
+		for audio_file in tqdm(audio_files, desc = desc):
 			try:
 				embedding = embedder(audio_file)
 				if isinstance(embedding, Tensor):
@@ -20,7 +20,6 @@ def get_embeddings(spk2utt : dict, embedder : load_embedder):
 
 			except Exception as _exception:
 				print(_exception)
-
 		# Stack embeddings and normalize each row to norm = 1		
 		if embeddings:
 			embeddings = vstack(embeddings)

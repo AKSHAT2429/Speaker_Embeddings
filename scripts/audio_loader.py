@@ -95,17 +95,16 @@ class audio_loader():
 		- trim_silence: Perform VAD (Voice Activity Detection)
 
 		'''
-
 		# Normalize audio's volume to target volume
 		if self.normalize_vol:
 			audio = normalize_volume(audio = audio, 
 						target_dBFS = self.target_dBFS,
 						increase_only = self.increase_only)
-		
+			
 		# Remove silence in audio
 		if self.trim_silence:
 			audio = remove_silence(audio = audio, vad_object = self.vad)
-	
+			
 		# Return pydub object
 		return audio 
 		
@@ -129,7 +128,6 @@ class audio_loader():
 		# Preprocess if needed
 		if to_preprocess:
 			audio = self.preprocess(audio)
-		
 		# Begin extracting window/slices 	
 		features = []
 		for _slice in self.get_indices(audio):
@@ -140,9 +138,8 @@ class audio_loader():
 				features.append(feature)	
 			else:
 				features.append(array)		
-
 		# Stack them into batch (ndim == 3)
-		if features:	
+		if features:
 			features = stack(features)
 		
 			# Convert to torch if needed
@@ -150,7 +147,6 @@ class audio_loader():
 				features = from_numpy(features)
 		else:
 			features = None	
-
 		return features
 		
 

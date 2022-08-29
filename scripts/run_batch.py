@@ -51,21 +51,18 @@ def main():
 	ext = sys.argv[2]
 	yaml_file = sys.argv[3]	
 
-	fig_savename = 'png/run_batch3.png'
+	fig_savename = 'png/run_sample_noisy_3.png'
 	fig_mode = 'umap'
 	title = "{} Projections".format(fig_mode.upper())
 	complete_msg = 'Embedding plot saved to: {}'.format(fig_savename)
 
 	# Make speaker-to-utterances dictionary
 	spk2utt = make_spk2utt(audio_dir, ext)
-
 	# Load embedding class
 	embedder = load_embedder(yaml_file)
-
 	# Extract embeddings for each speaker
 	# E.g. 10 audio per speaker --> 10 row vectors
 	spk2emb = get_embeddings(spk2utt, embedder)	
-
 	# Plot visualisations
 	projs, ax = plot_projections(spk2emb = spk2emb, title = title, mode = fig_mode)
 	ax.figure.savefig(fig_savename)

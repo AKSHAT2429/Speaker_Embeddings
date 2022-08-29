@@ -13,7 +13,6 @@ Author: Lim Zhi Hao			Date: 2022-03-22
 '''
 
 class load_embedder():
-		
 	def __init__(self, yaml_file : Path, batch_dim : int = 0):
 
 		# Initialize parameters
@@ -22,13 +21,10 @@ class load_embedder():
 		
 		# Load Configuration filev	
 		self.config = parse_yaml(self.yaml_file) # this is a dic of dict basically parsing yaml file
-
 		# Load Embedder class from config dictionary
 		self.embedder = dict2class(self.config)	
-
 		# Load Pretain model
 		self.load_pretrain()
-
 
 	def load_pretrain(self):
 		# Load pretrain model
@@ -39,9 +35,10 @@ class load_embedder():
 	def __call__(self, audio_file : Path):
 		features = self.embedder.load_audio.load(audio_file, 
 						self.embedder.extract_feature)
-
+		
 		if features is not None:
-			embeddings = self.embedder.model(features.to(self.device))		
+			embeddings = self.embedder.model(features.to(self.device))
+					
 			return embeddings.mean(self.batch_dim)	
 		else:
 			return None
@@ -53,10 +50,8 @@ def main():
 
 	audio_file = sys.argv[1]
 	yaml_file = sys.argv[2]
-
 	# Load form configuration file
 	embedder = load_embedder(yaml_file)
-
 	# Extract embeddings
 	embedding = embedder(audio_file)
 

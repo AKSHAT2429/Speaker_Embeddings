@@ -24,7 +24,7 @@ model_loader:
         module_name: model_loader.py
         class_name: model_loader
         kwargs:
-                state_dict_path: pretrain\voice_encoder.pt 
+                state_dict_path: pretrain//voice_encoder.pt 
                 use_cuda: False
                 to_eval: True
                 device_str: cuda:{}
@@ -45,6 +45,6 @@ load_audio:
                 return_last: True
                 match_samps: True
                 trim_silence: True
-                vad_mode: silero
+                vad_mode: webrtc
                 msecs: 1000
                 to_torch: True

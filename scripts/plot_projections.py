@@ -26,12 +26,9 @@ def plot_projections(spk2emb : dict,
 
 
 	_, ax = plt.subplots(figsize=(6, 6))
-
 	num_spks = len(spk2emb)
 	colors = np.random.randint(0,255,[num_spks, 3]).astype(np.float32) / 255
-	
 	data, labels = dict2data(spk2emb, to_numeric = to_numeric)
-	
 	# Compute the 2D projections.
 	# You could also project to another number of dimensions (e.g. 
 	# for a 3D plot) or use a different different dimensionality reduction 
